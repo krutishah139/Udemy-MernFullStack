@@ -2,14 +2,13 @@
 const passport = require('passport');
 
 //module.exports is used since the route handlers work on the express app object.
-module.exports = (app) => {
-  app.get('/', (req, res) => {
-    res.send({bye: 'buddy'});
-  });
-
-  app.get('/auth/google', passport.authenticate('google', {
-    scope: ['profile', 'email']
-  }));
+module.exports = app => {
+  app.get(
+    '/auth/google',
+    passport.authenticate('google', {
+      scope: ['profile', 'email']
+    })
+  );
 
   app.get('/auth/google/callback', passport.authenticate('google'));
 
@@ -18,7 +17,7 @@ module.exports = (app) => {
     res.send(req.user);
   });
 
-  app.get('/api/current_user', (req, res) =>{
+  app.get('/api/current_user', (req, res) => {
     res.send(req.user);
   });
 };
