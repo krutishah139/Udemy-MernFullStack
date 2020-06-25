@@ -5,7 +5,6 @@ const passport = require('passport');
 const keys = require('./config/keys')
 require('./models/User');
 require('./services/passport');
-const authRoutes = require('./routes/authRoutes');
 
 mongoose.connect(keys.mongoURI);
 
@@ -21,8 +20,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-authRoutes(app);
-//require('./routes/authRoutes')(app); this also works
+require('./routes/authRoutes')(app);
 
 const PORT = process.env.PORT||5000;
 app.listen(PORT);
