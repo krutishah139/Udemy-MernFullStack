@@ -12,7 +12,7 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser((id, done) => {
   User.findById(id).then(user => {
       done(null, user);
-    });
+    })
 });
 
 passport.use(
@@ -28,7 +28,7 @@ passport.use(
         //we already have a record with the given id
         return done(null, existingUser);
       }
-      
+
       //we dont have a user record with this given id
       const user = await new User({ googleId: profile.id }).save(); //new instance of a user
       done(null, user);
